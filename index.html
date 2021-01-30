@@ -28,7 +28,7 @@
 
     <!--Booking Section-->
     <main class="main-content container">
-        <div class="booking-form">
+        <div id="booking-form" class="booking-form">
             <h3>Booking Flights</h3>
             <div class="input-group">
                 <label for="">Flying From</label>
@@ -51,7 +51,7 @@
             <div class="input-group f-class">
                 <div>
                     <label for="">First Class ($150)</label>
-                    <input class="inp-style inp-width" type="number" name="">
+                    <input id="vip-ticket-count" class="inp-style inp-width" type="text" name="" value="1">
                 </div>
                 <div class="plus-minus-btn">
                     <p><span id="add-vip-ticket">+</span> <span id="remove-vip-ticket">-</span></p>
@@ -61,10 +61,10 @@
             <div class="input-group f-class">
                 <div>
                     <label for="">Economy ($100)</label>
-                    <input class="inp-style inp-width" type="number" name="">
+                    <input id="economy-ticket-count" class="inp-style inp-width" type="number" name="" value="1">
                 </div>
                 <div class="plus-minus-btn">
-                    <p> <span>+</span> <span>-</span> </p>
+                    <p> <span id="add-economy-ticket">+</span> <span id="remove-economy-ticket">-</span> </p>
                 </div>
             </div>
             <div class="calculations">
@@ -73,16 +73,17 @@
                         <p>Subtotal</p>
                     </div>
                     <div class="right">
-                        <p>$500</p>
+                        <p id="sub-total">$250</p>
                     </div>
                 </div>
 
                 <div class="amount">
                     <div class="left">
-                        <p>Charge 10% VAT</p>
+                        <p >Charge 10% VAT</p>
                     </div>
                     <div class="right">
-                        <p>$50</p>
+                        <p id="vat">$50</p>
+                        
                     </div>
                 </div>
                 <hr>
@@ -91,20 +92,114 @@
                         <h4>Total</h4>
                     </div>
                     <div class="right">
-                        <p>$550</p>
+                        <p id="grand-total">$300</p>
                     </div>
                 </div>
             </div>
-            <button class="btn-style">Book Now</button>
+            <button id="book-now-btn" class="btn-style">Book Now</button>
+        </div>
+
+        <div id="action-message" class="booking-form hidden-form">
+            <h3>Successfully Buying Your Ticket</h3>
+            <p>May your journey be free from stress and bring you home safely.</p>
+            <button id="go-back-btn">GO BACK</button>
         </div>
 
         <div class="booking-content">
             <h1>discover <br> around the world</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident voluptatibus quam fuga laborumalias veniam libero autem quasi maxime ullam vero nama imi dolor, architecto ab facilis eaque deserunt nobise voluptatibus quam</p>
         </div>
+
+
+       
     </section>
 
     <!--Thank You-->
+
+     <script>
+
+         //first class ticket handler
+         document.getElementById('add-vip-ticket').addEventListener('click', function(){
+           
+           getTicketQuantity(true,'vip-ticket-count');
+            
+        })
+         document.getElementById('remove-vip-ticket').addEventListener('click', function(){
+            
+           getTicketQuantity(false,'vip-ticket-count');
+            
+        })
+
+        //economy class ticket handler
+         document.getElementById('add-economy-ticket').addEventListener('click', function(){
+           
+           getTicketQuantity(true,'economy-ticket-count');
+            
+        })
+         document.getElementById('remove-economy-ticket').addEventListener('click', function(){
+            
+           getTicketQuantity(false,'economy-ticket-count');
+            
+        })
+        
+        //function for ticket quantity handler
+        function getTicketQuantity(isIncrease,id){
+            const countInput = document.getElementById(id);
+            const ticketCount = parseInt(countInput.value);
+            let ticketNewCount = ticketCount;
+            if(isIncrease == true){
+                ticketNewCount = ticketCount + 1;
+            }
+            if(isIncrease == false && ticketNewCount > 0){
+                ticketNewCount = ticketCount - 1
+            }
+            countInput.value = ticketNewCount;
+
+           calculateTotal()
+        }
+
+        //total cost calculate handler
+        function calculateTotal(){
+            let vipTicketCount = getInputValue('vip');
+            let economyTicketCount =  getInputValue('economy')
+       
+
+            const subTotalPrice = vipTicketCount * 150 + economyTicketCount * 100;
+            document.getElementById('sub-total').innerText ='$'+ subTotalPrice;
+
+            const vat = subTotalPrice * 0.1;
+            document.getElementById('vat').innerText ='$' + vat;
+
+            const totalPrice = subTotalPrice + vat;
+            document.getElementById('grand-total').innerText = totalPrice;
+        }
+
+        function getInputValue(quality) {
+            const ticketInput = document.getElementById(quality + '-ticket-count');
+            const ticketCount = parseInt(ticketInput.value);
+            return ticketCount;
+        }
+
+        document.getElementById('book-now-btn').addEventListener('click', function(){
+            const bookingForm = document.getElementById('booking-form');
+            bookingForm.style.display = 'none';
+            const actionMessage = document.getElementById('action-message');
+            actionMessage.style.display = 'block'
+
+
+        })
+        document.getElementById('go-back-btn').addEventListener('click', function(){
+            const bookingForm = document.getElementById('booking-form');
+            bookingForm.style.display = 'block';
+            const actionMessage = document.getElementById('action-message');
+            actionMessage.style.display = 'none'
+            
+
+        })
+
+     </script>
+
+
 </body>
 
 </html>

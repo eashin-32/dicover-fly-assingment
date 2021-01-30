@@ -67,10 +67,12 @@ nav ul li a:hover, a.active{
 }
 .plus-minus-btn{
     color: #3352F2;
+    border: 2px solid #3352F2;
     font-size: 30px;
-    padding: 2px;
+    padding: 3px;
     margin-top: 10px;
     word-spacing: 20px;
+    border-radius: 10px;
 }
 .booking-form  .calculations{
     margin: 10px 0;
@@ -122,9 +124,11 @@ nav ul li a:hover, a.active{
 }
 #add-vip-ticket{
     cursor: pointer;
+    
 }
 #remove-vip-ticket{
     cursor: pointer;
+    
 }
 #add-economy-ticket{
     cursor: pointer;
@@ -132,4 +136,30 @@ nav ul li a:hover, a.active{
 #remove-economy-ticket{
     cursor: pointer;
 }
-
+.plus-minus-btn span{
+    
+    display: inline-block;
+    
+}
+.hidden-form{
+    display: none;
+    text-align: center;
+    color: #00CC00;
+    height: 35rem;
+   font-weight: bold;
+}
+.hidden-form p{
+    color: rgba(0, 0, 0, 0.651);
+}
+.hidden-form h3{
+    margin-top: 15rem;
+}
+.hidden-form button{
+    background-color: #00CC00;
+    color: white;
+    padding: 10px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
